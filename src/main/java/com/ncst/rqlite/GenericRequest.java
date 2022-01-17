@@ -1,8 +1,8 @@
-package com.ncst.impl;
+package com.ncst.rqlite;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
-import com.ncst.dto.GenericResults;
+import com.ncst.rqlite.dto.GenericResults;
 
 import java.io.IOException;
 

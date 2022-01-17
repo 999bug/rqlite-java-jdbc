@@ -1,4 +1,4 @@
-package com.ncst.dto;
+package com.ncst.rqlite.dto;
 
 import com.google.api.client.json.GenericJson;
 import com.google.api.client.util.Key;

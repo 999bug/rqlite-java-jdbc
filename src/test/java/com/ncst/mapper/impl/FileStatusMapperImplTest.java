@@ -1,4 +1,4 @@
-package com.rqlite.mapper;
+package com.ncst.mapper.impl;
 
 import com.ncst.dto.FileStatus;
 import com.ncst.mapper.FileStatusMapper;
@@ -11,21 +11,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class FileStatusMapperTest {
+public class FileStatusMapperImplTest {
     private static final FileStatusMapper mapper = new FileStatusMapperImpl();
     private static final SnowflakeIdWorker ID_WORKER = new SnowflakeIdWorker(0L, 0L);
 
-    @Test
-    public void test() {
-        FileStatus fileStatusBySequenceId = mapper.getFileStatusBySequenceId(930057755077640192L);
-        System.out.println("fileStatusBySequenceId = " + fileStatusBySequenceId);
-    }
 
     @Test
     public void testSelectFileStatusListByUuidAndBakDate() {
-        List<FileStatus> fileStatusBySequenceId =
-                mapper.selectFileStatusListByUuidAndBakDate("RR33164F-AEBD-BD29-1296-EA5EA642B2DB", "2022-01-07_15-33-36");
-        System.out.println(fileStatusBySequenceId.size());
+        List<FileStatus> fileStatuses =
+                mapper.selectFileStatusListByUuidAndBakDate("RR33164F-AEBD-BD29-1296-EA5EA642B2DB", "2022-01-07_15-44-36");
+        fileStatuses.forEach(System.out::println);
     }
 
     @Test

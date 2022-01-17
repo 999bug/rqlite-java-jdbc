@@ -1,4 +1,4 @@
-package com.ncst.impl;
+package com.ncst.rqlite;
 
 public class RqliteNode {
     public String proto;

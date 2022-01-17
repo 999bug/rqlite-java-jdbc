@@ -1,8 +1,6 @@
 package com.ncst.rqlite;
 
 
-import com.ncst.impl.RqliteImpl;
-
 public enum RqliteFactory {
     INSTANCE;
 

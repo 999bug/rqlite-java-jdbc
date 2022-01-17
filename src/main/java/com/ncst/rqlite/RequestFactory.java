@@ -1,4 +1,4 @@
-package com.ncst.impl;
+package com.ncst.rqlite;
 
 import com.google.api.client.http.*;
 import com.google.api.client.http.javanet.NetHttpTransport;

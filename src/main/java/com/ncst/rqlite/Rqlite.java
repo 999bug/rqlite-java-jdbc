@@ -1,9 +1,9 @@
 package com.ncst.rqlite;
 
 
-import com.ncst.dto.ExecuteResults;
-import com.ncst.dto.Pong;
-import com.ncst.dto.QueryResults;
+import com.ncst.rqlite.dto.ExecuteResults;
+import com.ncst.rqlite.dto.Pong;
+import com.ncst.rqlite.dto.QueryResults;
 
 public interface Rqlite {
 

@@ -1,8 +1,8 @@
 package com.ncst.mapper;
 
 import com.alibaba.fastjson.JSONArray;
-import com.ncst.dto.ExecuteResults;
-import com.ncst.dto.QueryResults;
+import com.ncst.rqlite.dto.ExecuteResults;
+import com.ncst.rqlite.dto.QueryResults;
 import com.ncst.rqlite.NodeUnavailableException;
 import com.ncst.rqlite.Rqlite;
 import com.ncst.rqlite.RqliteFactory;
@@ -30,8 +30,6 @@ public interface BaseMapper<T> {
         if (query == null) {
             return "";
         }else {
-            float time = query.results[0].time;
-            System.out.println("=======================select use time = " + time + "=====================");
             return query.results[0].toString();
         }
     }

@@ -1,14 +1,13 @@
-package com.rqlite.impl;
+package com.ncst.rqlite;
 
-import com.ncst.impl.ExecuteRequest;
-import com.ncst.impl.QueryRequest;
-import com.ncst.impl.RequestFactory;
+import com.ncst.rqlite.ExecuteRequest;
+import com.ncst.rqlite.QueryRequest;
+import com.ncst.rqlite.RequestFactory;
 import com.ncst.rqlite.Rqlite;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-
 
 public class RequestFactoryTest {
     @Test

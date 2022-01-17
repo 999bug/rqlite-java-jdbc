@@ -1,13 +1,12 @@
-package com.rqlite;
+package com.ncst.rqlite;
 
-import java.util.Map;
-
+import com.ncst.rqlite.dto.Pong;
 import com.ncst.rqlite.Rqlite;
 import com.ncst.rqlite.RqliteFactory;
-import com.ncst.dto.Pong;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Map;
 
 public class RqliteFactoryTest {
 

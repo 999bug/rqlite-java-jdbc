@@ -1,27 +1,23 @@
-package com.rqlite;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+package com.ncst.rqlite;
+
+import com.ncst.rqlite.dto.ExecuteResults;
+import com.ncst.rqlite.dto.QueryResults;
 import com.ncst.rqlite.NodeUnavailableException;
 import com.ncst.rqlite.Rqlite;
 import com.ncst.rqlite.RqliteFactory;
-import com.ncst.dto.ExecuteResults;
-import com.ncst.dto.QueryResults;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class RqliteClientTest {
 
     public Rqlite rqlite;
 
     @Before
-    public void setup() {
+    public void setup(){
         rqlite = RqliteFactory.connect("http", "192.168.46.25", 4101);
     }
 
@@ -62,22 +58,20 @@ public class RqliteClientTest {
         try {
             rows = rqlite.Query("SELECT * FROM foo", Rqlite.ReadConsistencyLevel.WEAK);
             QueryResults.Result[] results = rows.results;
+//            System.out.println(Arrays.toString(results));
+            System.out.println(results);
+        } catch (NodeUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
 
-            QueryResults.Result result = results[0];
-            System.out.println("result = " + result.toString());
-            List<Foo> list = new ArrayList<>();
-            JSONObject jsonObject = JSONObject.parseObject(result.toString());
-            JSONArray values = jsonObject.getJSONArray("values");
+    @Test
+    public void testInsertData() {
+        QueryResults rows = null;
+        ExecuteResults results = null;
+        try {
+            results = rqlite.Execute("INSERT INTO I2FileStatus VALUES()");
 
-            for (int i = 0; i < values.size(); i++) {
-                JSONArray value = values.getJSONArray(i);
-                Integer integer = value.getInteger(0);
-                String string = value.getString(1);
-                list.add(new Foo(integer, string));
-                System.out.println(integer + "=====" + string);
-            }
-
-            list.forEach(System.out::println);
         } catch (NodeUnavailableException e) {
             e.printStackTrace();
         }
@@ -124,12 +118,12 @@ public class RqliteClientTest {
         }
     }
 
-   @Test
+    @Test
     public void testRqliteClientSyntax() {
         ExecuteResults results = null;
         QueryResults rows = null;
         try {
-            results = rqlite.Execute("nonsense");
+        results = rqlite.Execute("nonsense");
             Assert.assertNotNull(results);
             Assert.assertEquals(1, results.results.length);
             Assert.assertEquals(0, results.results[0].rowsAffected);
@@ -144,35 +138,10 @@ public class RqliteClientTest {
         }
     }
 
-    @After
+   //@After
     public void after() throws Exception {
         Rqlite rqlite = RqliteFactory.connect("http", "localhost", 4101);
         rqlite.Execute("DROP TABLE foo");
         rqlite.Execute("DROP TABLE bar");
-    }
-
-    private class Foo {
-        private Integer integer;
-        private String string;
-
-        public Foo(Integer integer, String string) {
-
-        }
-
-        public Integer getInteger() {
-            return integer;
-        }
-
-        public void setInteger(Integer integer) {
-            this.integer = integer;
-        }
-
-        public String getString() {
-            return string;
-        }
-
-        public void setString(String string) {
-            this.string = string;
-        }
     }
 }

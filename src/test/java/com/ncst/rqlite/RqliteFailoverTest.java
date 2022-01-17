@@ -1,10 +1,10 @@
-package com.rqlite;
+package com.ncst.rqlite;
 
+import com.ncst.rqlite.dto.ExecuteResults;
+import com.ncst.rqlite.dto.QueryResults;
 import com.ncst.rqlite.NodeUnavailableException;
 import com.ncst.rqlite.Rqlite;
 import com.ncst.rqlite.RqliteFactory;
-import com.ncst.dto.ExecuteResults;
-import com.ncst.dto.QueryResults;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,11 +23,11 @@ public class RqliteFailoverTest {
     Process node4;
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws IOException{
         // rqlitePath.config should contain one line with a path to the installation directory of Rqlite
         try {
             rqlitePath = Files.readAllLines(Paths.get("resources/rqlitePath.config")).get(0);
-        } catch (IOException e) {
+        } catch (IOException e){
             System.err.println(e);
         }
 
@@ -36,13 +36,12 @@ public class RqliteFailoverTest {
                 "-node-id", "node.2",
                 "-http-addr", "localhost:4007",
                 "-raft-addr", "localhost:4008",
-                "target/rqlitenodes/node2." + UUID.randomUUID());
+                "target/rqlitenodes/node2." + UUID.randomUUID()) ;
         node2 = pb1.start();
 
         try {
             Thread.sleep(2000); //Give this node 2 seconds to establish itself as leader
-        } catch (InterruptedException e) {
-        }
+        } catch (InterruptedException e) { }
 
         ProcessBuilder pb2 = new ProcessBuilder(rqlitePath + "/./rqlited",
                 "-node-id", "node.3",
@@ -97,8 +96,7 @@ public class RqliteFailoverTest {
             try {
                 rows = rqlite2.Query("SELECT * FROM baz", Rqlite.ReadConsistencyLevel.WEAK);
                 Assert.fail("Expected NodeUnavailableException was not thrown.");
-            } catch (NodeUnavailableException e) {
-            }
+            } catch (NodeUnavailableException e) {}
 
         } catch (Exception e) {
             Assert.fail("Failed due to an unexpected exception.\n" + e.getMessage());
@@ -106,7 +104,7 @@ public class RqliteFailoverTest {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown(){
         node3.destroy();
         node4.destroy();
     }

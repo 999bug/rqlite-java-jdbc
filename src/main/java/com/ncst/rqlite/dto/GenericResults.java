@@ -1,4 +1,4 @@
-package com.ncst.dto;
+package com.ncst.rqlite.dto;
 
 public interface GenericResults {
 }
